@@ -1,0 +1,34 @@
+public class Peinture extend Revetement {
+    String idPeinture;
+    double prix;
+
+    public String getIdPeinture() {
+        return idPeinture;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setIdPeinture(String idPeinture) {
+        this.idPeinture = idPeinture;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
+    }
+    
+    @Override
+    public String toString() {
+        return "Peinture{" + "idPeinture=" + idPeinture + ", prix=" + prix + '}';
+    }
+   
+    public double Montant (double surface){
+        Montant = prix*surface;}
+    
+    public.static void main (){
+        peinture = newPeinture();
+        System.out.println (Peinture.tostring)}
+
+    }
+}
