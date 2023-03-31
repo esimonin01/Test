@@ -1,1 +1,33 @@
+public class Isolation extend Revetement {
+    String idIsolant; 
+    double prix; 
 
+    public String getIdIsolant() {
+        return idIsolant;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    @Override
+    public String toString() {
+        return "Isolation{" + "idIsolant=" + idIsolant + ", prix=" + prix + '}';
+    }
+
+    public void setIdIsolant(String idIsolant) {
+        this.idIsolant = idIsolant;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
+    }
+    
+    public double Montant (double surface){
+        Montant = prix*surface ; }
+    
+    public.static void main (){
+        isolation = new Isolation ();
+        System.out.println (Isolation.tostring)}
+    }
+}
