@@ -1,0 +1,7 @@
+public abtract class Revetement {
+    String idRevetement ;
+    double Prix ; 
+    int pourMur, pourSol, pourPlafond ;
+    
+    public abstract double Montant ();
+}
