@@ -1,0 +1,14 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+
+/**
+ * JavaFX JavaFXProg1
+ */
+public class JavaFXProg1 extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        var javaVersion = SystemInfo.javaVersion();
+        var javafxVersion = SystemInfo.javafxVersion();
