@@ -48,7 +48,14 @@ public class Mur {
          
      }
 
-    
+    public Carrelage(int idRevetement, String designation, boolean pourMur, boolean pourSol, boolean pourPlafond, double prixUnitaire) {
+        super(idRevetement, designation, pourMur, pourSol, pourPlafond, prixUnitaire);
+    }
+
+    @Override
+    public boolean isCompatible(TypeSurface typeSurface) {
+        return this.isPourSol() && typeSurface.isPourSol() && !typeSurface.isPourPlafond();
+    }
 
     
     }
