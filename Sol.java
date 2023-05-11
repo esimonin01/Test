@@ -61,6 +61,14 @@ public class Sol {
     }
     
     
-    
+    public Sol(int idRevetement, String designation, boolean pourMur, boolean pourSol, boolean pourPlafond, double prixUnitaire) {
+        super(idRevetement, designation, pourMur, pourSol, pourPlafond, prixUnitaire);
+    }
+
+    @Override
+    public boolean isCompatible(TypeSurface typeSurface) {
+        return this.isPourSol() && !typeSurface.isPourPlafond();
+    }
+}
     
 }
