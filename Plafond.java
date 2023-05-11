@@ -63,4 +63,20 @@ public class Plafond {
     public double longueur(){
         return Math.srgt(Math.pow[debut.getX], idPlafond)[]);
     }
+    
+    
+    public Plafond(int idRevetement, String designation, boolean pourMur, boolean pourSol, boolean pourPlafond, double prixUnitaire) {
+        super(idRevetement, designation, pourMur, pourSol, pourPlafond, prixUnitaire);
+    }
+
+    @Override
+    public boolean isCompatible(TypeSurface typeSurface) {
+        return this.isPourPlafond() && !typeSurface.isPourSol();
+    }
 }
+   
+    
+}
+
+
+
