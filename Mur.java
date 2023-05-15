@@ -15,7 +15,9 @@ public class Mur {
     double hsp;
 
     public Mur(int idMur, Coin C1, Coin fin) {
-        if (
+        if (C1.getX() == fin.getX() && C1.getY() == fin.getY()) {
+            Systeme.out.println ("Les deux coins du mur se superposent");
+        }
             
         this.idMur = idMur;
         this.C1 = C1;
