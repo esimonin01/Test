@@ -13,6 +13,8 @@ public class Mur { // ajouter attribut nomber de porte et nombre de fenetre et d
     Coin debut;
     Coin C2;
     double hsp;
+    
+     private static int nextId=0;
 
     public Mur(int idMur, Coin C1, Coin fin) {
         if (debut.getX() == fin.getX() && debut.getY() == fin.getY()) {
