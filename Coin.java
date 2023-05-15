@@ -12,13 +12,21 @@ public class Coin {
    int idCoin;
    double x;
    double y;
-
+    private static int nextId=0;
    
    public Coin(int idCoin, double x, double y){
        this.idCoin = idCoin;
        this.x = x;
-       this.y = y;
-       
+       this.y = y; 
+       }
+   
+    
+   public Coin(double x, double y){
+       this.idCoin = nextid;
+       this.x = x;
+       this.y = y; 
+       }
+   
        public String toString(){
            return this.idCoin +""+ this.x+""+this.y;
        }
