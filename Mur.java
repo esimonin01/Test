@@ -15,30 +15,30 @@ public class Mur { // ajouter attribut nomber de porte et nombre de fenetre et d
     double hsp;
 
     public Mur(int idMur, Coin C1, Coin fin) {
-        if (C1.getX() == fin.getX() && C1.getY() == fin.getY()) {
+        if (debut.getX() == fin.getX() && debut.getY() == fin.getY()) {
             Systeme.out.println ("Les deux coins du mur se superposent");
         }
             
         this.idMur = idMur;
-        this.C1 = C1;
+        this.debut = debut;
         this.fin = fin;
     }
 
     @Override
     public String toString() {
-        return "Mur{" + "idMur=" + idMur + ", C1=" + C1 + ", fin=" + fin + '}';
+        return "Mur{" + "idMur=" + idMur + ", debut=" + debut + ", fin=" + fin + '}';
     }
 
-    public Coin getC1() {
-        return C1;
+    public Coin getdebut() {
+        return debut;
     }
 
     public Coin getfin() {
         return fin;
     }
 
-    public void setC1(Coin C1) {
-        this.C1 = C1;
+    public void setdebut(Coin debut) {
+        this.C1 = debut;
     }
 
     public void setfin(Coin fin) {
