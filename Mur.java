@@ -15,6 +15,8 @@ public class Mur {
     double hsp;
 
     public Mur(int idMur, Coin C1, Coin fin) {
+        if (
+            
         this.idMur = idMur;
         this.C1 = C1;
         this.fin = fin;
