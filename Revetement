@@ -47,4 +47,11 @@ public abstract class Revetement {
         catalogueRev.put(16, new Stratifie(16, "Stratifie", false, true, false, 31.99));
         catalogueRev.put(17, new Gazon(17, "Gazon", false, true, false, 17.95));
         catalogueRev.put(18, new Liege(18, "Liege",
+        
+        
+        // lire a partir du fichier revtement .txt à l'aide de la metghode BufferReader 
+        utiliser le split(";") pour separer les champs 
+        rechecher un mot dans ce 
+        
+        ajouter la sauvegarde du dessin dans un fichier dans classe main 
 
