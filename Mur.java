@@ -8,7 +8,7 @@ import java.lang.Math;
  *
  * @author rsow01
  */
-public class Mur {
+public class Mur { // ajouter attribut nomber de porte et nombre de fenetre et demander pour ensuite enlver de la surface totale) 
     int idMur;
     Coin debut;
     Coin C2;
