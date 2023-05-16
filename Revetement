@@ -54,4 +54,84 @@ public abstract class Revetement {
         rechecher un mot dans ce 
         
         ajouter la sauvegarde du dessin dans un fichier dans classe main 
+        
+        
+        
+        import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Revetement {
+    private int id;
+    private String designation;
+    private boolean pourMur;
+    private boolean pourSol;
+    private boolean pourPlafond;
+    private double prixUnitaire;
+
+    public Revetement(int id, String designation, boolean pourMur, boolean pourSol, boolean pourPlafond, double prixUnitaire) {
+        this.id = id;
+        this.designation = designation;
+        this.pourMur = pourMur;
+        this.pourSol = pourSol;
+        this.pourPlafond = pourPlafond;
+        this.prixUnitaire = prixUnitaire;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public boolean isPourMur() {
+        return pourMur;
+    }
+
+    public boolean isPourSol() {
+        return pourSol;
+    }
+
+    public boolean isPourPlafond() {
+        return pourPlafond;
+    }
+
+    public double getPrixUnitaire() {
+        return prixUnitaire;
+    }
+
+    @Override
+    public String toString() {
+        return designation + " - " + prixUnitaire + "€";
+    }
+
+    public static List<Revetement> chargerRevêtements(String fichier) throws IOException {
+        List<Revetement> revetements = new ArrayList<>();
+
+        BufferedReader br = new BufferedReader(new FileReader(fichier));
+        String ligne;
+
+        while ((ligne = br.readLine()) != null) {
+            String[] champs = ligne.split(";");
+            int id = Integer.parseInt(champs[0]);
+            String designation = champs[1];
+            boolean pourMur = Integer.parseInt(champs[2]) == 1;
+            boolean pourSol = Integer.parseInt(champs[3]) == 1;
+            boolean pourPlafond = Integer.parseInt(champs[4]) == 1;
+            double prixUnitaire = Double.parseDouble(champs[5]);
+
+            Revetement revetement = new Revetement(id, designation, pourMur, pourSol, pourPlafond, prixUnitaire);
+            revetements.add(revetement);
+        }
+
+        br.close();
+
+        return revetements;
+    }
+}
+
 
