@@ -12,3 +12,85 @@ public class JavaFXProg1 extends Application {
     public void start(Stage stage) {
         var javaVersion = SystemInfo.javaVersion();
         var javafxVersion = SystemInfo.javafxVersion();
+
+
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
+public class DevisApp extends Application {
+    private BorderPane root;
+    private VBox floorsContainer;
+    private VBox summaryContainer;
+    private double totalDevis;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Calcul Devis"); // indiquent à l'application de démarrer en créant une fenêtre principale avec le titre spécifié.//
+
+        // Création de la page principale avec les étages, la somme et la barre d'outils
+        root = new BorderPane();
+        root.setPadding(new Insets(10));
+        root.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        // Container pour les étages
+        floorsContainer = new VBox(10);
+        floorsContainer.setPadding(new Insets(10));
+        floorsContainer.setAlignment(Pos.CENTER);
+        root.setCenter(floorsContainer);
+
+        // Container pour la somme
+        summaryContainer = new VBox(10);
+        summaryContainer.setPadding(new Insets(10));
+        summaryContainer.setAlignment(Pos.TOP_CENTER);
+        root.setRight(summaryContainer);
+
+        // Barre d'outils à gauche
+        VBox toolsContainer = createToolsContainer();
+        root.setLeft(toolsContainer);
+
+        Scene scene = new Scene(root, 800, 600);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    private VBox createToolsContainer() {
+        VBox toolsContainer = new VBox(10);
+        toolsContainer.setPadding(new Insets(10));
+        toolsContainer.setAlignment(Pos.TOP_LEFT);
+
+        Button addPointButton = new Button("Ajouter un point");
+        addPointButton.setOnAction(e -> {
+            // Logique pour ajouter un point
+        });
+
+        Button connectPointsButton = new Button("Relier les points");
+        connectPointsButton.setOnAction(e -> {
+            // Logique pour relier les points
+        });
+
+        toolsContainer.getChildren().addAll(addPointButton, connectPointsButton);
+
+        return toolsContainer;
+    }
+
+    private void updateSummary() {
+        summaryContainer.getChildren().clear();
+
+        Label totalLabel = new Label("Devis total: " + totalDevis + "€");
+        summaryContainer.getChildren().add(totalLabel);
+
+        // Logique pour afficher le détail des surfaces et revêtements associés
+    }
+}
