@@ -1,0 +1,224 @@
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+
+  /* @Override
+    public void start(Stage stage) {
+        var javaVersion = SystemInfo.javaVersion();
+        var javafxVersion = SystemInfo.javafxVersion(); */
+
+
+public class DevisApp extends Application {
+    private BorderPane root;
+    private TabPane floorsContainer;
+    private VBox summaryContainer;
+    private double totalDevis;
+
+    
+    /*public DevisApp(BorderPane root) {
+        this.root = root;
+    }*/
+    
+
+    
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Calcul Devis");
+
+        // Création de la page principale avec les étages, la somme et la barre d'outils
+        root = new BorderPane();
+        root.setPadding(new Insets(10));
+        root.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        // Container pour les étages
+        floorsContainer = new TabPane();
+        root.setTop(floorsContainer);
+        
+         // Création du bouton "+"
+        Button addButton = new Button("+");
+        addButton.setOnAction(e -> {
+            Tab tab = new Tab("Nouvel Onglet");
+            floorsContainer.getTabs().add(tab);
+        });
+
+        // Création du conteneur pour le bouton
+        HBox buttonContainer = new HBox(addButton);
+        buttonContainer.setAlignment(Pos.CENTER_RIGHT);
+        root.setBottom(buttonContainer);
+
+        // Container pour la somme
+        summaryContainer = new VBox(10);
+        summaryContainer.setPadding(new Insets(10));
+        summaryContainer.setAlignment(Pos.TOP_CENTER);
+        root.setRight(summaryContainer);
+
+        // Barre d'outils à gauche
+        VBox toolsContainer = createToolsContainer();
+        root.setLeft(toolsContainer);
+        
+     /*  Button mod1 = new Button ("Ajouter un point"); 
+       Button mod2 = new Button ("Relier les points");
+       Button mod3 = new Button ("Revetements"); 
+        
+        
+        toolsContainer.getChildren().addAll(mod1, mod2, mod3);
+        toolsContainer = new Pane ();*/
+
+     
+        Scene scene = new Scene(root, 800, 600);
+        primaryStage.setTitle("Devis Bâtiment");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+         
+    }
+
+    
+    // Créer le Canvas pour afficher la grille et les dessins
+Canvas canvas = new Canvas();
+GraphicsContext gc = canvas.getGraphicsContext2D();
+
+// Définir la taille du canvas
+double canvasWidth = 800;
+double canvasHeight = 600;
+canvas.setWidth(canvasWidth);
+canvas.setHeight(canvasHeight);
+
+// Dessiner la grille
+int gridSize = 20; // Taille d'une cellule de la grille
+gc.setStroke(Color.GRAY);
+
+// Dessiner les lignes verticales
+for (int x = 0; x < canvasWidth; x += gridSize) {
+    gc.strokeLine(x, 0, x, canvasHeight);
+}
+
+// Dessiner les lignes horizontales
+for (int y = 0; y < canvasHeight; y += gridSize) {
+    gc.strokeLine(0, y, canvasWidth, y);
+}
+
+// Ajouter le Canvas au plan central du BorderPane
+pane.setCenter(canvas);
+
+
+
+
+    private VBox createToolsContainer() {
+        VBox toolsContainer = new VBox(10);
+        toolsContainer.setPadding(new Insets(10));
+        toolsContainer.setAlignment(Pos.TOP_LEFT);
+
+        Button addPointButton = new Button("Ajouter un point");
+            addPointButton.setOnAction(e -> {
+      
+        // Créer une fenêtre de dialogue pour saisir les coordonnées du point
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Ajouter un point");
+
+       // Créer les labels et les champs de texte pour les coordonnées x et y
+    Label xLabel = new Label("Coordonnée X :");
+    TextField xField = new TextField();
+
+    Label yLabel = new Label("Coordonnée Y :");
+    TextField yField = new TextField();
+
+        // Créer le bouton de validation
+        Button saveButton = new Button("Enregistrer");
+        saveButton.setOnAction(event -> {
+            // Récupérer les coordonnées saisies
+            double x = Double.parseDouble(xField.getText());
+            double y = Double.parseDouble(yField.getText());
+
+            // Créer un nouveau coin avec les coordonnées saisies
+             coin = new coin(x, y);
+            
+            
+            
+            // Fermer la fenêtre de dialogue
+            dialogStage.close();
+        });
+
+        Button drawWalButton = new Button("Dessiner les murs");
+        drawWallButton.setOnAction(e -> {
+           
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Dessiner les murs");
+            
+            // Créer les labels et les champs de texte pour les données
+        Label coinLabel = new Label("Coin du mur");
+        TextField coinField = new TextField();
+
+        Label largeurLabel = new Label("Largeur du mur");
+        TextField largeurField = new TextField();
+    
+        Label longeurLabel = new Label("Longeur du mur");
+        TextField longeurField = new TextField();
+    
+            // Créer le bouton de validation
+        Button saveButton = new Button("Enregistrer");
+        saveButton.setOnAction(event -> {
+            // Récupérer les données saisies
+            double largeur = Double.parseDouble(largeurField.getText());
+            double longeur = Double.parseDouble(longeurField.getText());
+
+            // Créer un nouveau mur avec les données saisies
+             Mur = new Mur(x, y);
+            
+            
+            
+            // Fermer la fenêtre de dialogue
+            dialogStage.close();
+       
+            // Logique pour relier les points
+        });
+        
+        Button choiceRevetButton = new Button("Choix du revetement");
+            choiceRevetButton.setOnAction(e -> {
+                
+                Stage dialogStage = new Stage();
+                dialogStage.setTitle("Choix du revetement");
+                
+                 // Créer les labels et les champs de texte pour les données
+        Label murLabel = new Label("Mur");
+        TextField murField = new TextField();
+
+        Label hauteurLabel = new Label("Hauteur du mur");
+        TextField hauteurField = new TextField();
+    
+        Label revetLabel = new Label("Revetement du mur (entre 1 et 18)");
+        TextField revetField = new TextField();
+    
+                
+        });
+
+        toolsContainer.getChildren().addAll(addPointButton, drawWallButton, choiceRevetButton);
+
+        return toolsContainer;
+    }
+
+                    
+                    
+    private void updateSummary() {
+        summaryContainer.getChildren().clear();
+
+        Label totalLabel = new Label("Devis total: " + totalDevis + "€");
+        summaryContainer.getChildren().add(totalLabel);
+
+        // Logique pour afficher le détail des surfaces et revêtements associés
+    }
+}
