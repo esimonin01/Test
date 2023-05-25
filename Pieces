@@ -1,1 +1,25 @@
+ class Piece extends Mur {
+    private double longueur;
+    private double largeur;
+    private double hauteur;
+    
+    // Constructeur de la classe Pièce
+    public Piece(coin coin1, coin coin2, double hauteur) {
+        super(coin1, coin2, hauteur);
+        this.longueur = longueur;
+        this.largeur = largeur;
+    }
+    
+    // Méthode pour changer les dimensions des murs de la pièce
+    public void changerDimensions(double longueur, double largeur) {
+        this.longueur = longueur;
+        this.largeur = largeur;
+    }
+    
+    // Méthode pour calculer la surface au sol de la pièce
+    public double calculerSurfaceAuSol() {
+        return longueur * largeur;
+    }
+}
+
 
