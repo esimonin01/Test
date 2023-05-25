@@ -2,41 +2,60 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.devisbatiment;
+package com.mycompany.projettestzk;
 
 /**
  *
- * @author rsow01
+ * @author eulaliesimonin
  */
-public class Coin {
-   int idCoin;
+public class coin {
+     int idcoin;
    double x;
    double y;
     private static int nextId=0;
    
-   public Coin(int idCoin, double x, double y){
-       this.idCoin = idCoin;
+   public coin(int idcoin, double x, double y){
+       this.idcoin = idcoin;
        this.x = x;
        this.y = y; 
        }
    
     
-   public Coin(double x, double y){
-       this.idCoin = nextid;
+   public coin(double x, double y){
+       this.idcoin = nextId;
        this.x = x;
        this.y = y; 
        }
    
        public String toString(){
-           return this.idCoin +""+ this.x+""+this.y;
+           return this.idcoin +""+ this.x+""+this.y;
        }
-       public static void main(){
-           Coin = newCoin();
-           System.out.println(Coin.toString());
-       }
-             public void getX (double x){
-                 return x;
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public int getIdcoin() {
+        return idcoin;
+    }
+  
+       
+       
+            
+             public void setX (double x){
+                 this.x = x;
              }
+             public void setY (double y){
+                 this.y = y;
+                    
+             }
+             
+              
+}
              public void getY (double y){
                  return y;
              }
