@@ -1,68 +1,3 @@
-public abtract class Revetement {
-    String idRevetement ;
-    double Prix ; 
-    int pourMur, pourSol, pourPlafond ;
-    
-    public abstract double Montant ();
-}
-
-import java.util.HashMap;
-
-public abstract class Revetement {
-    private static HashMap<Integer, Revetement> catalogueRev;
-    protected int idRevetement;
-    protected String designation;
-    protected boolean pourMur;
-    protected boolean pourSol;
-    protected boolean pourPlafond;
-    protected double prixUnitaire;
-
-    public Revetement(int idRevetement, String designation, boolean pourMur, boolean pourSol, boolean pourPlafond, double prixUnitaire) {
-        this.idRevetement = idRevetement;
-        this.designation = designation;
-        this.pourMur = pourMur;
-        this.pourSol = pourSol;
-        this.pourPlafond = pourPlafond;
-        this.prixUnitaire = prixUnitaire;
-    }
-
-    // Méthode statique pour initialiser le catalogue de revêtements
-    public static void initialiserCatalogue() {
-        catalogueRev = new HashMap<Integer, Revetement>();
-        catalogueRev.put(1, new PeintureMur(1, "Peinture Mur", true, false, false, 10.95));
-        catalogueRev.put(2, new Carrelage(2, "Carrelage", true, true, false, 49.75));
-        catalogueRev.put(3, new Lambris(3, "Lambris", true, true, true, 50.60));
-        catalogueRev.put(4, new Marbre(4, "Marbre", true, true, false, 97.85));
-        catalogueRev.put(5, new Crepi(5, "Crepi", true, false, false, 67.80));
-        catalogueRev.put(6, new PapierPeint(6, "Papier peint", true, false, false, 32.90));
-        catalogueRev.put(7, new PlaquettesDeParement(7, "Plaquettes de parement", true, false, false, 15.20));
-        catalogueRev.put(8, new PeinturePlafond(8, "Peinture Plafond", true, false, true, 77.30));
-        catalogueRev.put(9, new PeintureSol(9, "Peinture Sol", false, true, false, 29.90));
-        catalogueRev.put(10, new Carrelage(10, "Carrelage", true, true, false, 89.45));
-        catalogueRev.put(11, new Lambris(11, "Lambris", true, true, false, 42.50));
-        catalogueRev.put(12, new Liege(12, "Liege", true, false, false, 25.40));
-        catalogueRev.put(13, new Parquet(13, "Parquet", false, true, false, 46.36));
-        catalogueRev.put(14, new VinyleLino(14, "Vinyle Lino", false, true, false, 23.55));
-        catalogueRev.put(15, new Moquette(15, "Moquette", false, true, false, 48.10));
-        catalogueRev.put(16, new Stratifie(16, "Stratifie", false, true, false, 31.99));
-        catalogueRev.put(17, new Gazon(17, "Gazon", false, true, false, 17.95));
-        catalogueRev.put(18, new Liege(18, "Liege",
-        
-        
-        // lire a partir du fichier revtement .txt à l'aide de la metghode BufferReader 
-        utiliser le split(";") pour separer les champs 
-        rechecher un mot dans ce 
-        
-        ajouter la sauvegarde du dessin dans un fichier dans classe main 
-        
-        
-        
-        import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Revetement {
     private int id;
     private String designation;
@@ -70,7 +5,8 @@ public class Revetement {
     private boolean pourSol;
     private boolean pourPlafond;
     private double prixUnitaire;
-
+    private String [] attributs ; 
+    int trouve; 
     public Revetement(int id, String designation, boolean pourMur, boolean pourSol, boolean pourPlafond, double prixUnitaire) {
         this.id = id;
         this.designation = designation;
@@ -78,6 +14,9 @@ public class Revetement {
         this.pourSol = pourSol;
         this.pourPlafond = pourPlafond;
         this.prixUnitaire = prixUnitaire;
+    }
+
+    public Revetement() {
     }
 
     public int getId() {
@@ -109,7 +48,36 @@ public class Revetement {
         return designation + " - " + prixUnitaire + "€";
     }
 
-    public static List<Revetement> chargerRevêtements(String fichier) throws IOException {
+    // en se basant sur numero revetemnt //
+    double getPrixRevtement (int idR) throws IOException  {
+        try 
+             {       
+                 BufferedReader flux = new BufferedReader(new FileReader("rev.txt"));
+                 String lignelue; 
+             
+
+        while ((lignelue=flux.readLine())!=null)
+             { 
+                 attributs = lignelue.split (";");
+                 if (Integer.parseInt(attributs[0])==idR)
+                 { trouve=1;
+                 System.out.println(lignelue); 
+                 return(Double.parseDouble(attributs[5]));
+                 }     
+             }
+       flux.close();     
+    } 
+    catch(FileNotFoundException err)  { 
+    System.out.println("Erreur : le fichier n'existe pas !"+err);
+}
+    catch (IOException err) { 
+    System.out.println("Erreur : "+err);
+}
+    if (trouve==0)
+    System.out.println("Introuvable");
+    return(0); 
+            
+    /* public static List<Revetement> chargerRevêtements(String fichier) throws IOException {
         List<Revetement> revetements = new ArrayList<>();
 
         BufferedReader br = new BufferedReader(new FileReader(fichier));
@@ -132,6 +100,11 @@ public class Revetement {
 
         return revetements;
     }
+*/
 }
+    }
+
+
+
 
 
