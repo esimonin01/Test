@@ -2,73 +2,75 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.devisbatiment;
-import java.lang.Math;
+package com.mycompany.projetdevis;
 /**
  *
- * @author rsow01
+ * @author eulaliesimonin
  */
-public class Mur { // ajouter attribut nomber de porte et nombre de fenetre et demander pour ensuite enlver de la surface totale) 
+import javafx.scene.canvas.GraphicsContext ; 
+import javafx.scene.paint.Color; 
+
+public class Mur {
     int idMur;
-    Coin debut;
-    Coin C2;
-    double hsp;
+    Coin debut, fin;
+    static int nextID=0;
+    int nbp;
+    int nbf;
+  
     
-    private static int nextId=0;
-    public Mur(Coin debut, Coin fin) {
-        if (debut.getX() == fin.getX() && debut.getY() == fin.getY()) {
-            Systeme.out.println ("Les deux coins du mur se superposent"); } 
-        this.idMur = nextid;
-        this.debut = debut;
-        this.fin = fin;
-
-    public Mur(int idMur, Coin debut, Coin fin) {
-        if (debut.getX() == fin.getX() && debut.getY() == fin.getY()) {
-            Systeme.out.println ("Les deux coins du mur se superposent");}
-        this.idMur = idMur;
-        this.debut = debut;
-        this.fin = fin;
+    
+    Mur(Coin dc, Coin fc, int nbp, int nbf)
+    {
+        this.idMur=nextID ++;
+        this.debut=dc;
+        this.fin=fc;
+        this.nbp=nbp;
+        this.nbf=nbf;
+    }
+    
+ 
+ 
+    double longueur()
+    {
+             return  Math.sqrt((this.debut.getX()-this.debut.getX())*(this.fin.getX()-this.debut.getX()) + (this.fin.getY()-this.debut.getY())*(this.fin.getY()-this.debut.getY()));
+    
+}
+    
+    
+        public double surface(double h)
+    {
+        return this.longueur() * h;
     }
 
-    @Override
-    public String toString() {
-        return "Mur{" + "idMur=" + idMur + ", debut=" + debut + ", fin=" + fin + '}';
+    public int getIdMur() {
+        return idMur;
     }
 
-    public Coin getdebut() {
+    public Coin getDebut() {
         return debut;
     }
 
-    public Coin getfin() {
+    public Coin getFin() {
         return fin;
     }
 
-    public void setdebut(Coin debut) {
-        this.C1 = debut;
+    public int getNbp() {
+        return nbp;
     }
 
-    public void setfin(Coin fin) {
-        this.fin = fin;
+    public int getNbf() {
+        return nbf;
     }
-     public double longueur(Coin debut, Coin fin){
-        return Math.sqrt(Math.pow((debut.getX()-fin.getX()),2)+Math.pow((debut.getY()-fin.getY(),2));
-    }
-     public double surface(Mur m){
-         return hsp*m.longueur(debut,fin);
-         
-     }
+        
+    public void Dessiner (GraphicsContext gc) {
+        //Modif couleur et epaisseur des traits
+        gc.setStroke(Color.BLACK); 
+        gc.setLineWidth(2);
+        
+        //Dessin des murs
+        gc.strokeLine(debut.getX(), debut.getY(), fin.getX(), fin.getY());
+        
+        
+    }  
 
-    public Carrelage(int idRevetement, String designation, boolean pourMur, boolean pourSol, boolean pourPlafond, double prixUnitaire) {
-        super(idRevetement, designation, pourMur, pourSol, pourPlafond, prixUnitaire);
-    }
-
-    @Override
-    public boolean isCompatible(TypeSurface typeSurface) {
-        return this.isPourSol() && typeSurface.isPourSol() && !typeSurface.isPourPlafond();
-    }
-
-    
-    }
-    
-    
-
+}
