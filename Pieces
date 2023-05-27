@@ -1,15 +1,77 @@
- class Piece extends Mur {
+package com.mycompany.projetdevis;
+
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
+/**
+ *
+ * @author eulaliesimonin
+ */
+    class Pieces {
     private double longueur;
     private double largeur;
     private double hauteur;
+    Coin c1; 
+    Coin c2; 
+    Mur mur1, mur2, mur3, mur4 ; 
+    int idPieces;
+    static int nextID=0;
     
     // Constructeur de la classe Pièce
-    public Piece(coin coin1, coin coin2, double hauteur) {
-        super(coin1, coin2, hauteur);
-        this.longueur = longueur;
-        this.largeur = largeur;
+    public Pieces(Coin c1, Coin c2) {
+        this.idPieces=nextID ++;
+        this.longueur = Math.abs(c2.getX()-c1.getX());
+        this.largeur = Math.abs(c2.getY()-c1.getY());
+        this.c1 = c1; 
+        this.c2 = c2; 
     }
     
+    public void dessiner (GraphicsContext gc) {
+        gc.setFill(Color.BLUE);
+        
+        gc.fillRect(c1.getX(), c1.getY(), longueur, largeur);
+        
+    }
+    
+    /*
+     public Pieces(mur mur1, mur mur2, mur mur3, mur mur4) {
+        this.mur1 = mur1;
+        this.mur2 = mur2;
+        this.mur3 = mur3;
+        this.mur4 = mur4;
+        this.idPieces=nextID ++;
+        this.longueur = 0 ; 
+        this.largeur = 0 ; 
+    }
+   */
+    
+/*    
+public 
+
+// Récupérez la longueur des murs à l'aide de leurs méthodes appropriées
+double longueurMur1 = mur1.getlongueur();
+double longueurMur2 = mur2.getlongueur();
+double longueurMur3 = mur3.getlongueur();
+double longueurMur4 = mur4.getlongueur();
+
+// Vérifiez que les murs ont deux à deux la même taille
+if((longueurMur1 == longueurMur2 )&& (longueurMur3 == longueurMur4)) {
+
+    else if (longueurMur1 == longueurMur3 && longueurMur2 == longueurMur4) {
+    longueur = longueurMur1;
+    largeur = longueurMur2;
+} else if (longueurMur1 == longueurMur4 && longueurMur2 == longueurMur3) {
+    longueur = longueurMur1;
+    largeur = longueurMur2;
+} else {
+    // Les murs ne forment pas une pièce carrée
+    // Gérez l'erreur ou affichez un message à l'utilisateur
+}
+
+// Créez une instance de la classe Pieces avec les dimensions déterminées
+Pieces Pieces = new Pieces(longueur, largeur);
+ */  
+
     // Méthode pour changer les dimensions des murs de la pièce
     public void changerDimensions(double longueur, double largeur) {
         this.longueur = longueur;
@@ -21,5 +83,4 @@
         return longueur * largeur;
     }
 }
-
 
