@@ -1,0 +1,17 @@
+package com.mycompany.projetdevis;
+
+/**
+ *
+ * @author eulaliesimonin
+ */
+public class Fenetre extends Ouverture {
+    
+    public Fenetre (double hauteur, double largeur) {
+        super (hauteur, largeur);
+    }
+     public static double surfacefenetre () {
+         hauteur = 0.9 ; 
+         largeur = 0.9; 
+        return hauteur*largeur;
+    }
+}
