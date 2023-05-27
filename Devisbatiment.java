@@ -3,15 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
  */
 
-package com.mycompany.devisbatiment;
+package com.mycompany.projetdevis;
+
+import javafx.application.Application;
 
 /**
  *
- * @author rsow01
+ * @author eulaliesimonin
  */
-public class Devisbatiment {
+public class DevisBatiment {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+   public static void main(String[] args) {
+        Application.launch(DevisApp.class, args);
     }
 }
