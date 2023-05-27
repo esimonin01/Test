@@ -1,0 +1,12 @@
+public class Porte extends Ouverture {
+    
+    public Porte (double hauteur, double largeur) {
+        super (hauteur, largeur);
+    }
+    
+    public static double surfaceporte () {
+        hauteur = 2.1;
+        largeur = 0.9; 
+        return hauteur*largeur;
+    }
+}
