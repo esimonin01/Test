@@ -34,22 +34,30 @@ public class DevisApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Calcul Devis");
-
         
-     /*   // Conyainer barre en haut 
+    // Création de la page principale avec les étages, la somme et la barre d'outils
+        root = new BorderPane();
+        root.setPadding(new Insets(10));
+        root.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        // Container pour les étages
+        floorsContainer = new HBox();
+        root.setTop(floorsContainer);
+        
+      // Conyainer barre en haut 
         HBox floorsContainer = createFloorsContainer();
-        root.setTop(floorsContainer);*/
+        root.setTop(floorsContainer);
         
 
         // Barre d'outils Ã  gauche
         VBox toolsContainer = createToolsContainer();
         root.setLeft(toolsContainer);
 
-        // CrÃ©er le Canvas pour afficher la grille et les dessins
+        // Créer le Canvas pour afficher la grille et les dessins
         canvas = new Canvas();
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        // DÃ©finir la taille du canvas
+        // Définir la taille du canvas
         double canvasWidth = 800;
         double canvasHeight = 600;
         canvas.setWidth(canvasWidth);
@@ -78,35 +86,30 @@ public class DevisApp extends Application {
         primaryStage.show();
     }
 
-    /* private HBox createFloorsContainer () {
-                // CrÃ©ation de la page principale avec les Ã©tages, la somme et la barre d'outils
-        root = new BorderPane();
-        root.setPadding(new Insets(10));
-        root.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-
-        // Container pour les Ã©tages
-        floorsContainer = new HBox();
-        root.setTop(floorsContainer);
+     private HBox createFloorsContainer () {
+        HBox floorsContainer = new HBox(2);
+        floorsContainer.setPadding(new Insets(2));
+        floorsContainer.setAlignment(Pos.TOP_LEFT);
+       
         
 
-        // CrÃ©ation du bouton "+"
-        Button addButton = new Button("+");
-        addButton.setOnAction(e -> {
+        // Création du bouton "+"
+        Button addButton2 = new Button("+");
+        addButton2.setOnAction(e -> {
             Tab tab = new Tab("Nouvel Onglet");
-            floorsContainer..add(tab);
+          /*  floorsContainer.add(tab);*/
         });
 
-        // CrÃ©ation du conteneur pour le bouton
-        VBox buttonContainer = new VBox(addButton);
-        buttonContainer.setAlignment(Pos.CENTER_RIGHT);
-        root.setBottom(buttonContainer);
+        // Création du conteneur pour le bouton
+        VBox buttonContainer2 = new VBox(addButton2);
+        buttonContainer2.setAlignment(Pos.CENTER_RIGHT);
+        root.setBottom(buttonContainer2);
 
-        // Container pour la somme
-        summaryContainer = new VBox(10);
-        summaryContainer.setPadding(new Insets(10));
-        summaryContainer.setAlignment(Pos.TOP_CENTER);
-        root.setRight(summaryContainer);
-    }*/
+    floorsContainer.getChildren().addAll(floorsContainer,addButton2);
+    return floorsContainer;    
+    };
+ 
+    
     
     
     
@@ -119,27 +122,27 @@ public class DevisApp extends Application {
 
         Button addPointButton = new Button("Ajouter un Coin");
         addPointButton.setOnAction(e -> {
-            // CrÃ©er une fenÃªtre de dialogue pour saisir les coordonnÃ©es du point
+            // Créer une fenÃªtre de dialogue pour saisir les coordonnées du point
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Ajouter un point");
 
-            // CrÃ©er les labels et les champs de texte pour les coordonnÃ©es x et y
+            // Créer les labels et les champs de texte pour les coordonnées x et y
             Label xLabel = new Label("Coordonnée X :");
             TextField xField = new TextField();
 
             Label yLabel = new Label("CoordonnéeY :");
             TextField yField = new TextField();
 
-            // CrÃ©er le bouton de validation
+            // Créer le bouton de validation
             Button saveButton = new Button("Enregistrer");
             saveButton.setOnAction(event -> {
-                // RÃ©cupÃ©rer les coordonnÃ©es saisies
+                // Récupérer les coordonnées saisies
                 double x = Double.parseDouble(xField.getText());
                 double y = Double.parseDouble(yField.getText());
 
                 GraphicsContext gc = canvas.getGraphicsContext2D();
 
-                // CrÃ©er un nouveau Coin avec les coordonnÃ©es saisies
+                // Créer un nouveau Coin avec les coordonnées saisies
                 Coin Coin = new Coin(x, y);
 
                 // Dessiner le Coin sur le canvas
@@ -156,72 +159,94 @@ public class DevisApp extends Application {
             dialogStage.setScene(new Scene(dialogContent));
             dialogStage.showAndWait();
         });
+        
+        Button choiceRevet = new Button("Choisir des revetements");
+        choiceRevet.setOnAction(e -> {
+        
+         // Créer une fenêtre de dialogue pour saisir les coordonnées du mur
+        Stage dialogStage4 = new Stage();
+        dialogStage4.setTitle("Choisir des revetements");
+        
+         // Créer les labels et les champs de texte pour le id de la piece
+        Label idLabel = new Label("Identifiant de la pièce");
+        TextField idField = new TextField();
+        
+        // Créer les labels et les champs de texte pour les revetemnts des surfaces 
+        Label rM1Label = new Label("Revetemnt Mur 1");
+        TextField rM1Field = new TextField();
+        
+        Label rM2Label = new Label("Revetemnt Mur 2");
+        TextField rM2Field = new TextField();
+        
+        Label rM3Label = new Label("Revetemnt Mur 3");
+        TextField rM3Field = new TextField();
+        
+        Label rM4Label = new Label("Revetemnt Mur 4");
+        TextField rM4Field = new TextField();
+        
+        Label rSolLabel = new Label("Revetemnt Sol");
+        TextField rSolField = new TextField();
+        
+        Label rPlaLabel = new Label("Revetemnt Plafond");
+        TextField rPlaField = new TextField();
+        
+        // Créer le bouton de validation
+        Button saveButton = new Button("OK");
+        saveButton.setOnAction(event -> {
+            
+            // Récupérer les ID des revêtements saisis dans les champs de texte
+            int rM1 = Integer.parseInt(rM1Field.getText());
+            int rM2 = Integer.parseInt(rM2Field.getText());
+            int rM3 = Integer.parseInt(rM3Field.getText());
+            int rM4 = Integer.parseInt(rM4Field.getText());
+            int rSol = Integer.parseInt(rSolField.getText());
+            int rPla = Integer.parseInt(rPlaField.getText());
 
-        Button drawPiecesButton = new Button("Dessiner une pièce");
-        drawPiecesButton.setOnAction(e -> {
-            // CrÃ©er une fenÃªtre de dialogue pour saisir les coordonnÃ©es de la piÃ¨ce
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Dessiner une pièce");
+            /* // Créer des instances de la classe Revetement en utilisant les ID récupérés
+            Revetement revetementM1 = new Revetement();
+            double prixrM1 = revetementM1.getPrixRevtement(rM1);
 
-            // CrÃ©er les labels et les champs de texte pour les coordonnÃ©es des Coins
-            Label x1Label = new Label("Coordonnée X Coin 1 :");
-            TextField x1Field = new TextField();
+            Revetement revetementM2 = new Revetement();
+            double prixrM2 = revetementM2.getPrixRevtement(rM2);
 
-            Label y1Label = new Label("Coordonnée Y Coin 1 :");
-            TextField y1Field = new TextField();
+            Revetement revetementM3 = new Revetement();
+            double prixrM3 = revetementM3.getPrixRevtement(rM3);
 
-            Label x2Label = new Label("Coordonnée X Coin 2 :");
-            TextField x2Field = new TextField();
+            Revetement revetementM4 = new Revetement();
+            double prixrM4 = revetementM4.getPrixRevtement(rM4);
 
-            Label y2Label = new Label("Coordonnée Y Coin 2 :");
-            TextField y2Field = new TextField();
+            Revetement revetementSol = new Revetement();
+            double prixSol = revetementSol.getPrixRevtement(rSol);
 
-            // CrÃ©er le bouton de validation
-            Button saveButton = new Button("OK");
-            saveButton.setOnAction(event -> {
-                // RÃ©cupÃ©rer les coordonnÃ©es saisies
-                double x1 = Double.parseDouble(x1Field.getText());
-                double y1 = Double.parseDouble(y1Field.getText());
-                double x2 = Double.parseDouble(x2Field.getText());
-                double y2 = Double.parseDouble(y2Field.getText());
-
-                // CrÃ©er les Coins avec les coordonnÃ©es saisies
-                Coin Coin1 = new Coin(x1, y1);
-                Coin Coin2 = new Coin(x2, y2);
-                Coin Coin3 = new Coin (x1 +(x2 - x1),y1 );
-                Coin Coin4 = new Coin (x2, y1 +(y2 - y1) );
-
-                Mur Mur4 = new Mur (Coin1, Coin3, 0, 0);
-                Mur Mur1 = new Mur (Coin1, Coin4, 0, 0);       
-                Mur Mur2 = new Mur (Coin4, Coin2, 0, 0);        
-                Mur Mur3 = new Mur (Coin2, Coin3, 0, 0);
-                        
-                // CrÃ©er la piÃ¨ce avec les Coins
-                Pieces Pieces = new Pieces(Coin1, Coin2);
-
-                // Dessiner la piÃ¨ce sur le canvas
-                GraphicsContext gc = canvas.getGraphicsContext2D();
-                Pieces.dessiner(gc);
-
-                // Fermer la fenÃªtre de dialogue
-                dialogStage.close();
-            });
-
-            // Ajouter les labels, les champs de texte et le bouton Ã  la fenÃªtre de dialogue
-            VBox dialogContent = new VBox(10, x1Label, x1Field, y1Label, y1Field, x2Label, x2Field, y2Label, y2Field, saveButton);
-            dialogContent.setAlignment(Pos.CENTER);
-            dialogContent.setPadding(new Insets(10));
-            dialogStage.setScene(new Scene(dialogContent));
-            dialogStage.showAndWait();
+            Revetement revetementPlafond = new Revetement();
+            double prixPlafond = revetementPlafond.getPrixRevtement(rPla);*/
+            
+           
+            // Fermer la fenêtre de dialogue
+            dialogStage4.close();
+    
         });
-
-      Button drawWallButton = new Button("Dessiner un mur");
+        
+        // Ajouter les labels, les champs de texte et le bouton Ã  la fenêtre de dialogue
+        VBox dialogContent = new VBox(30, idLabel, idField, rM1Label, rM1Field, rM2Label, rM2Field, rM3Label, rM3Field,rM4Label, rM4Field,rSolLabel, rSolField, rPlaLabel, rPlaField,  saveButton);
+        dialogContent.setAlignment(Pos.CENTER);
+        dialogContent.setPadding(new Insets(30));
+        dialogStage4.setScene(new Scene(dialogContent));
+        dialogStage4.showAndWait();
+        
+    });
+        
+        
+        
+        
+  Button drawWallButton = new Button("Dessiner un mur");
     drawWallButton.setOnAction(e -> {
-        // CrÃ©er une fenÃªtre de dialogue pour saisir les coordonnÃ©es du mur
+        
+        // Créer une fenêtre de dialogue pour saisir les coordonnées du mur
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Dessiner un mur");
 
-        // CrÃ©er les labels et les champs de texte pour les coordonnÃ©es des Coins
+        // Créer les labels et les champs de texte pour les coordonnées des Coins
         Label x1Label = new Label("Coordonnée X Coin 1 :");
         TextField x1Field = new TextField();
 
@@ -234,42 +259,118 @@ public class DevisApp extends Application {
         Label y2Label = new Label("Coordonnée Y Coin 2 :");
         TextField y2Field = new TextField();
 
-        // CrÃ©er le bouton de validation
+        // Créer le bouton de validation
         Button saveButton = new Button("OK");
         saveButton.setOnAction(event -> {
-            // RÃ©cupÃ©rer les coordonnÃ©es saisies
+            // Récupérer les coordonnées saisies
             double x1 = Double.parseDouble(x1Field.getText());
             double y1 = Double.parseDouble(y1Field.getText());
             double x2 = Double.parseDouble(x2Field.getText());
             double y2 = Double.parseDouble(y2Field.getText());
 
-            // CrÃ©er les Coins avec les coordonnÃ©es saisies
+            // Créer les Coins avec les coordonnées saisies
             Coin Coin1 = new Coin(x1, y1);
             Coin Coin2 = new Coin(x2, y2);
 
-            // CrÃ©er le mur avec les Coins
+            // Créer le mur avec les Coins
             Mur mur = new Mur(Coin1, Coin2, 0, 0);
 
             // Dessiner le mur sur le canvas
             GraphicsContext gc = canvas.getGraphicsContext2D();
             mur.Dessiner(gc);
 
-            // Fermer la fenÃªtre de dialogue
+            // Fermer la fenêtre de dialogue
             dialogStage.close();
         }); 
 
-        // Ajouter les labels, les champs de texte et le bouton Ã  la fenÃªtre de dialogue
+        // Ajouter les labels, les champs de texte et le bouton Ã  la fenêtre de dialogue
         VBox dialogContent = new VBox(10, x1Label, x1Field, y1Label, y1Field, x2Label, x2Field, y2Label, y2Field, saveButton);
         dialogContent.setAlignment(Pos.CENTER);
         dialogContent.setPadding(new Insets(10));
         dialogStage.setScene(new Scene(dialogContent));
         dialogStage.showAndWait();
     });
+        
+        
+        Button drawPiecesButton = new Button("Dessiner une pièce");
+        drawPiecesButton.setOnAction(e -> {
+            // Créer une fenÃªtre de dialogue pour saisir les coordonnées de la piÃ¨ce
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Dessiner une pièce");
 
-    toolsContainer.getChildren().addAll(addPointButton, drawPiecesButton, drawWallButton);
+            // Créer les labels et les champs de texte pour les coordonnées des Coins
+            Label x1Label = new Label("Coordonnée X Coin 1 :");
+            TextField x1Field = new TextField();
+
+            Label y1Label = new Label("Coordonnée Y Coin 1 :");
+            TextField y1Field = new TextField();
+
+            Label x2Label = new Label("Coordonnée X Coin 2 :");
+            TextField x2Field = new TextField();
+
+            Label y2Label = new Label("Coordonnée Y Coin 2 :");
+            TextField y2Field = new TextField();
+
+            // Créer le bouton de validation
+            Button saveButton = new Button("OK");
+            saveButton.setOnAction(event -> {
+                // Récupérer les coordonnées saisies
+                double x1 = Double.parseDouble(x1Field.getText());
+                double y1 = Double.parseDouble(y1Field.getText());
+                double x2 = Double.parseDouble(x2Field.getText());
+                double y2 = Double.parseDouble(y2Field.getText());
+
+                // Créer les Coins avec les coordonnées saisies
+                Coin Coin1 = new Coin(x1, y1);
+                Coin Coin2 = new Coin(x2, y2);
+                Coin Coin3 = new Coin (x1 +(x2 - x1),y1 );
+                Coin Coin4 = new Coin (x2, y1 +(y2 - y1) );
+
+                Mur Mur4 = new Mur (Coin1, Coin3, 0, 0);
+                Mur Mur1 = new Mur (Coin1, Coin4, 0, 0);       
+                Mur Mur2 = new Mur (Coin4, Coin2, 0, 0);        
+                Mur Mur3 = new Mur (Coin2, Coin3, 0, 0);
+                        
+                // Créer la pièce avec les Coins
+                Pieces Pieces = new Pieces(Coin1, Coin2);
+
+                // Dessiner la pièce sur le canvas
+                GraphicsContext gc = canvas.getGraphicsContext2D();
+                Pieces.dessiner(gc);
+                Mur1.Dessiner(gc);
+                Mur2.Dessiner(gc);
+                Mur3.Dessiner(gc);
+                Mur4.Dessiner(gc);
+
+                // Fermer la fenêtre de dialogue
+                dialogStage.close();
+            });
+
+            // Ajouter les labels, les champs de texte et le bouton à  la fenètre de dialogue
+            VBox dialogContent = new VBox(10, x1Label, x1Field, y1Label, y1Field, x2Label, x2Field, y2Label, y2Field, saveButton);
+            dialogContent.setAlignment(Pos.CENTER);
+            dialogContent.setPadding(new Insets(10));
+            dialogStage.setScene(new Scene(dialogContent));
+            dialogStage.showAndWait();
+        });
+
+    
+
+    toolsContainer.getChildren().addAll(addPointButton,drawWallButton, drawPiecesButton);
     return toolsContainer;
 }
+
     
+
     
+/*
+// Container pour la somme
+        summaryContainer = new VBox(10);
+        summaryContainer.setPadding(new Insets(10));
+        summaryContainer.setAlignment(Pos.TOP_CENTER);
+        root.setRight(summaryContainer);
+        }
     
+  */  
+}
 }
